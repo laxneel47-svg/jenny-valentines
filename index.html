@@ -78,17 +78,12 @@
       font-size: 22px;
       font-weight: bold;
     }
-
-    #music {
-      display: none;
-    }
   </style>
 </head>
 <body>
 
   <div class="container">
     
-    <!-- YOUR IMAGE -->
     <img src="jnn.png" alt="Jenny">
 
     <h1>Jenny 💖<br>Will you be my Valentine?</h1>
@@ -100,39 +95,31 @@
       Happy Valentines Baby ❤️<br>
       I can't wait to see you :)
     </div>
-    
   </div>
 
-  <!-- Hidden Music Player -->
-  <div id="music">
-    <iframe 
-      width="0" 
-      height="0"
-      src="https://www.youtube.com/embed/YNyFAro1E5M?autoplay=1&loop=1&playlist=YNyFAro1E5M"
-      frameborder="0"
-      allow="autoplay">
-    </iframe>
-  </div>
+  <!-- MP3 Music -->
+  <audio id="bgMusic" src="Polo G - Martin & Gina (Official Video).mp3"></audio>
 
   <script>
     const yesBtn = document.getElementById("yes");
     const noBtn = document.getElementById("no");
     const success = document.getElementById("success");
-    const music = document.getElementById("music");
+    const bgMusic = document.getElementById("bgMusic");
 
     yesBtn.onclick = function() {
       success.style.display = "block";
-      music.style.display = "block";
       document.body.classList.add("dark-mode");
 
-      // 🎉 Confetti burst
+      // Play music
+      bgMusic.play();
+
+      // Confetti burst
       confetti({
         particleCount: 200,
         spread: 120,
         origin: { y: 0.6 }
       });
 
-      // Side confetti
       setTimeout(() => {
         confetti({
           particleCount: 100,
