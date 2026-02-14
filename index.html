@@ -5,7 +5,6 @@
   <title>For Jenny 💕</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
@@ -19,9 +18,9 @@
       height: 100vh;
       text-align: center;
       color: white;
-      overflow: hidden;
-      transition: 0.4s ease;
     }
+
+    .hidden { display: none; }
 
     .dark {
       background: linear-gradient(to right, #1a001a, #330033);
@@ -39,12 +38,6 @@
       height: 250px;
       object-fit: cover;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(255,255,255,0.6);
-    }
-
-    h1 {
-      margin-top: 20px;
-      font-size: 2em;
     }
 
     button {
@@ -54,23 +47,10 @@
       border-radius: 20px;
       font-size: 16px;
       cursor: pointer;
-      transition: 0.2s;
     }
 
-    #yes {
-      background: #4CAF50;
-      color: white;
-    }
-
-    #no {
-      background: #f44336;
-      color: white;
-      position: relative;
-    }
-
-    button:hover {
-      transform: scale(1.1);
-    }
+    #yes { background: #4CAF50; color: white; }
+    #no { background: #f44336; color: white; position: relative; }
 
     #message {
       display: none;
@@ -78,63 +58,68 @@
       font-size: 22px;
       font-weight: bold;
     }
+
+    #startScreen {
+      font-size: 24px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <img src="jnn.png" alt="Jenny">
+  <div id="startScreen">
+    Click anywhere to start ❤️
+  </div>
 
-    <h1>Jenny 💖<br>Will you be my Valentine?</h1>
+  <div id="mainContent" class="hidden">
+    <div class="container">
+      <img src="jnn.png" alt="Jenny">
 
-    <button id="yes">Yes 💕</button>
-    <button id="no">No 😢</button>
+      <h1>Jenny 💖<br>Will you be my Valentine?</h1>
 
-    <div id="message">
-      Happy Valentines Baby ❤️<br>
-      I can't wait to see you :)
+      <button id="yes">Yes 💕</button>
+      <button id="no">No 😢</button>
+
+      <div id="message">
+        Happy Valentines Baby ❤️<br>
+        I can't wait to see you :)
+      </div>
     </div>
   </div>
 
-  <!-- Audio -->
   <audio id="music" src="music.mp3"></audio>
 
   <script>
+    const startScreen = document.getElementById("startScreen");
+    const mainContent = document.getElementById("mainContent");
     const yesBtn = document.getElementById("yes");
     const noBtn = document.getElementById("no");
     const message = document.getElementById("message");
     const music = document.getElementById("music");
 
+    // FIRST USER INTERACTION (guarantees audio permission)
+    startScreen.addEventListener("click", function() {
+      startScreen.classList.add("hidden");
+      mainContent.classList.remove("hidden");
+
+      music.volume = 1;
+      music.play();
+      music.pause();
+      music.currentTime = 0;
+    });
+
     yesBtn.addEventListener("click", function() {
       message.style.display = "block";
       document.body.classList.add("dark");
 
-      // Force play (guaranteed user interaction)
-      music.pause();
       music.currentTime = 0;
       music.play();
 
-      // Confetti
       confetti({
         particleCount: 200,
         spread: 120,
         origin: { y: 0.6 }
       });
-
-      setTimeout(() => {
-        confetti({
-          particleCount: 100,
-          angle: 60,
-          spread: 70,
-          origin: { x: 0 }
-        });
-        confetti({
-          particleCount: 100,
-          angle: 120,
-          spread: 70,
-          origin: { x: 1 }
-        });
-      }, 400);
     });
 
     noBtn.addEventListener("mouseover", function() {
