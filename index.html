@@ -20,6 +20,11 @@
       text-align: center;
       color: white;
       overflow: hidden;
+      transition: 0.5s ease;
+    }
+
+    .dark-mode {
+      background: linear-gradient(to right, #1a1a1a, #330033);
     }
 
     .container {
@@ -31,8 +36,10 @@
 
     img {
       width: 250px;
+      height: 250px;
       border-radius: 20px;
       object-fit: cover;
+      box-shadow: 0 0 20px rgba(255,255,255,0.5);
     }
 
     h1 {
@@ -81,8 +88,8 @@
 
   <div class="container">
     
-    <!-- CHANGE THIS TO YOUR IMAGE NAME -->
-    <img src="jenny.jpg" alt="Jenny">
+    <!-- YOUR IMAGE -->
+    <img src="jnn.png" alt="Jenny">
 
     <h1>Jenny 💖<br>Will you be my Valentine?</h1>
 
@@ -90,8 +97,8 @@
     <button id="no">No 😢</button>
 
     <div id="success">
-      YAYYY Jenny!!! 💕<br>
-      You officially my Martin & Gina now 😏🔥
+      Happy Valentines Baby ❤️<br>
+      I can't wait to see you :)
     </div>
   </div>
 
@@ -115,13 +122,30 @@
     yesBtn.onclick = function() {
       success.style.display = "block";
       music.style.display = "block";
+      document.body.classList.add("dark-mode");
 
-      // 🎉 CONFETTI EXPLOSION
+      // 🎉 Confetti burst
       confetti({
         particleCount: 200,
         spread: 120,
         origin: { y: 0.6 }
       });
+
+      // Side confetti
+      setTimeout(() => {
+        confetti({
+          particleCount: 100,
+          angle: 60,
+          spread: 70,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 100,
+          angle: 120,
+          spread: 70,
+          origin: { x: 1 }
+        });
+      }, 500);
     };
 
     noBtn.onmouseover = function() {
