@@ -98,45 +98,44 @@
   </div>
 
   <!-- MP3 Music -->
-  <audio id="bgMusic" src="music.mp3" preload="auto"></audio>
+<audio id="bgMusic" preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
 
 
   <script>
-    const yesBtn = document.getElementById("yes");
-    const noBtn = document.getElementById("no");
-    const success = document.getElementById("success");
-    const bgMusic = document.getElementById("bgMusic");
+ yesBtn.addEventListener("click", function() {
+  success.style.display = "block";
+  document.body.classList.add("dark-mode");
 
-    yesBtn.onclick = function() {
-      success.style.display = "block";
-      document.body.classList.add("dark-mode");
+  bgMusic.currentTime = 0;
+  bgMusic.play().catch(error => {
+    console.log("Playback blocked:", error);
+  });
 
-      // Play music
-      bgMusic.play();
+  confetti({
+    particleCount: 200,
+    spread: 120,
+    origin: { y: 0.6 }
+  });
 
-      // Confetti burst
-      confetti({
-        particleCount: 200,
-        spread: 120,
-        origin: { y: 0.6 }
-      });
+  setTimeout(() => {
+    confetti({
+      particleCount: 100,
+      angle: 60,
+      spread: 70,
+      origin: { x: 0 }
+    });
+    confetti({
+      particleCount: 100,
+      angle: 120,
+      spread: 70,
+      origin: { x: 1 }
+    });
+  }, 500);
+});
 
-      setTimeout(() => {
-        confetti({
-          particleCount: 100,
-          angle: 60,
-          spread: 70,
-          origin: { x: 0 }
-        });
-        confetti({
-          particleCount: 100,
-          angle: 120,
-          spread: 70,
-          origin: { x: 1 }
-        });
-      }, 500);
-    };
-
+    
     noBtn.onmouseover = function() {
       const x = Math.random() * (window.innerWidth - 100);
       const y = Math.random() * (window.innerHeight - 50);
