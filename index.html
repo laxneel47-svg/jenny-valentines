@@ -5,7 +5,7 @@
   <title>For Jenny 💕</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Confetti Library -->
+  <!-- Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <style>
@@ -20,15 +20,15 @@
       text-align: center;
       color: white;
       overflow: hidden;
-      transition: 0.5s ease;
+      transition: 0.4s ease;
     }
 
-    .dark-mode {
-      background: linear-gradient(to right, #1a1a1a, #330033);
+    .dark {
+      background: linear-gradient(to right, #1a001a, #330033);
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255,255,255,0.1);
       padding: 40px;
       border-radius: 20px;
       backdrop-filter: blur(10px);
@@ -37,9 +37,9 @@
     img {
       width: 250px;
       height: 250px;
-      border-radius: 20px;
       object-fit: cover;
-      box-shadow: 0 0 20px rgba(255,255,255,0.5);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.6);
     }
 
     h1 {
@@ -54,16 +54,16 @@
       border-radius: 20px;
       font-size: 16px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: 0.2s;
     }
 
     #yes {
-      background-color: #4CAF50;
+      background: #4CAF50;
       color: white;
     }
 
     #no {
-      background-color: #f44336;
+      background: #f44336;
       color: white;
       position: relative;
     }
@@ -72,7 +72,7 @@
       transform: scale(1.1);
     }
 
-    #success {
+    #message {
       display: none;
       margin-top: 20px;
       font-size: 22px;
@@ -90,32 +90,31 @@
     <button id="yes">Yes 💕</button>
     <button id="no">No 😢</button>
 
-    <div id="success">
+    <div id="message">
       Happy Valentines Baby ❤️<br>
       I can't wait to see you :)
     </div>
   </div>
 
-  <!-- MP3 Music -->
-  <audio id="bgMusic" preload="auto">
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+  <!-- Audio -->
+  <audio id="music" src="music.mp3"></audio>
 
   <script>
     const yesBtn = document.getElementById("yes");
     const noBtn = document.getElementById("no");
-    const success = document.getElementById("success");
-    const bgMusic = document.getElementById("bgMusic");
+    const message = document.getElementById("message");
+    const music = document.getElementById("music");
 
     yesBtn.addEventListener("click", function() {
-      success.style.display = "block";
-      document.body.classList.add("dark-mode");
+      message.style.display = "block";
+      document.body.classList.add("dark");
 
-      bgMusic.currentTime = 0;
-      bgMusic.play().catch(error => {
-        console.log("Playback blocked:", error);
-      });
+      // Force play (guaranteed user interaction)
+      music.pause();
+      music.currentTime = 0;
+      music.play();
 
+      // Confetti
       confetti({
         particleCount: 200,
         spread: 120,
@@ -135,12 +134,12 @@
           spread: 70,
           origin: { x: 1 }
         });
-      }, 500);
+      }, 400);
     });
 
     noBtn.addEventListener("mouseover", function() {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
       noBtn.style.position = "absolute";
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
