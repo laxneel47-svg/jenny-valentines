@@ -9,7 +9,6 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #ffdde1;
       background: linear-gradient(to right, #ff758c, #ff7eb3);
       display: flex;
       justify-content: center;
@@ -17,6 +16,7 @@
       height: 100vh;
       text-align: center;
       color: white;
+      overflow: hidden;
     }
 
     .container {
@@ -37,7 +37,7 @@
     }
 
     button {
-      padding: 10px 20px;
+      padding: 12px 25px;
       margin: 10px;
       border: none;
       border-radius: 20px;
@@ -64,7 +64,8 @@
     #success {
       display: none;
       margin-top: 20px;
-      font-size: 20px;
+      font-size: 22px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -78,8 +79,20 @@
     <button id="yes">Yes 💕</button>
     <button id="no">No 😢</button>
 
-    <div id="success">YAYYY Jenny!!! 💕 See you soon 🥰</div>
+    <div id="success">
+      YAYYY Jenny!!! 💕<br>
+      You officially my Martin & Gina now 😏🔥
+    </div>
   </div>
+
+  <!-- Background Music -->
+  <iframe 
+    width="0" 
+    height="0" 
+    src="https://www.youtube.com/embed/YNyFAro1E5M?autoplay=1&loop=1&playlist=YNyFAro1E5M"
+    frameborder="0"
+    allow="autoplay">
+  </iframe>
 
   <script>
     const yesBtn = document.getElementById("yes");
@@ -91,8 +104,8 @@
     };
 
     noBtn.onmouseover = function() {
-      const x = Math.random() * window.innerWidth - 100;
-      const y = Math.random() * window.innerHeight - 100;
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
       noBtn.style.position = "absolute";
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
